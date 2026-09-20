@@ -1,0 +1,22 @@
+package com.taskmanager.taskservice.controller;
+
+import com.taskmanager.taskservice.repo.TaskRepository;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Map;
+
+@RestController
+public class TaskController {
+    private final TaskRepository taskRepository;
+    private final RestTemplate restTemplate;
+    private final String userServiceUrl;
+
+    public TaskController(TaskRepository taskRepository, RestTemplate restTemplate, @Value("localhost3001") String userServiceUrl) {
+        this.taskRepository = taskRepository;
+        this.restTemplate = restTemplate;
+        this.userServiceUrl = userServiceUrl;
+    }
+}
