@@ -1,9 +1,11 @@
 package com.taskmanager.userservice.controller;
 
+import com.taskmanager.userservice.model.User;
 import com.taskmanager.userservice.repo.UserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -21,5 +23,10 @@ public class UserController {
         } catch (Exception e) {
             return Map.of("status", "DOWN", "error", e.getMessage());
         }
+    }
+
+    @GetMapping("/api/users")
+    public List<User> list() {
+        return userRepository.findAllByOrderByIdAsc();
     }
 }
