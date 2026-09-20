@@ -85,4 +85,13 @@ public class TaskController {
         Task saved = taskRepository.save(task);
         return ResponseEntity.ok(saved);
     }
+
+    @DeleteMapping("/api/tasks/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        if (!taskRepository.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "task not found"));
+        }
+        taskRepository.deleteById(id);
+        return ResponseEntity.ok(Map.of("task has been deleted", true));
+    }
 }
