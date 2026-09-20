@@ -19,4 +19,14 @@ public class TaskController {
         this.restTemplate = restTemplate;
         this.userServiceUrl = userServiceUrl;
     }
+
+    @GetMapping("/health")
+    public Map<String, String> health() {
+        try{
+            taskRepository.count();
+            return Map.of("status", "ok", "service", "tasks");
+        } catch (Exception e) {
+            return Map.of("status", "degraded", "error", e.getMessage());
+        }
+    }
 }
