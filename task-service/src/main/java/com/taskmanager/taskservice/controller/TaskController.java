@@ -1,11 +1,13 @@
 package com.taskmanager.taskservice.controller;
 
+import com.taskmanager.taskservice.model.Task;
 import com.taskmanager.taskservice.repo.TaskRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -28,5 +30,10 @@ public class TaskController {
         } catch (Exception e) {
             return Map.of("status", "degraded", "error", e.getMessage());
         }
+    }
+
+    @GetMapping("/api/tasks")
+    public List<Task> list() {
+        return taskRepository.findAllByOrderByIdAsc();
     }
 }
