@@ -5,10 +5,7 @@ import com.taskmanager.taskservice.repo.TaskRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
@@ -70,5 +67,22 @@ public class TaskController {
         task.setIsCompleted(false);
         Task savedTask = taskRepository.save(task);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedTask);
+    }
+
+    @PutMapping("/api/tasks/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Map<String, Object> body) {
+        Task task = taskRepository.findById(id).orElse(null);
+        if (task == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", "task not found"));
+        }
+        if (body.containsKey("title") && body.get("title") != null) {
+            task.setTaskTitle(body.get("title").toString());
+        }
+        if (body.containsKey("done") && body.get("done") != null) {
+            task.setIsCompleted(Boolean.parseBoolean(body.get("done").toString()));
+        }
+        Task saved = taskRepository.save(task);
+        return ResponseEntity.ok(saved);
     }
 }
