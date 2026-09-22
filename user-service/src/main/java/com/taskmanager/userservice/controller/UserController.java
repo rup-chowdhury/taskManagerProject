@@ -51,4 +51,13 @@ public class UserController {
         return userRepository.findById(id).<ResponseEntity<?>>map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "User not found")));
     }
+
+    @DeleteMapping("/api/users/{id}")
+    public ResponseEntity<?> deleteUserById(@PathVariable Long id) {
+        if (!userRepository.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "User not found"));
+        }
+        userRepository.deleteById(id);
+        return ResponseEntity.ok(Map.of("User deleted", true));
+    }
 }
