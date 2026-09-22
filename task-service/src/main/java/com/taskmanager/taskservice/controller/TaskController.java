@@ -19,7 +19,7 @@ public class TaskController {
     private final RestTemplate restTemplate;
     private final String userServiceUrl;
 
-    public TaskController(TaskRepository taskRepository, RestTemplate restTemplate, @Value("http://localhost:3001") String userServiceUrl) {
+    public TaskController(TaskRepository taskRepository, RestTemplate restTemplate, @Value("${user.service.url:http://localhost:3001}") String userServiceUrl) {
         this.taskRepository = taskRepository;
         this.restTemplate = restTemplate;
         this.userServiceUrl = userServiceUrl;
