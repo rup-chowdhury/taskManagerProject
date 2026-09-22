@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Task Manager</h1>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Users</h3>
+        <input id="uname" placeholder="Name" /><br />
+        <input id="uemail" placeholder="email@example.com" /><br />
+        <button onclick="createUser()">Create user</button>
+        <ul id="users"></ul>
+      </div>
+      <div class="card">
+        <h3>Tasks</h3>
+        <input id="ttitle" placeholder="Task title" style="width: 60%" />
+        <input
+          id="tuserid"
+          placeholder="user_id"
+          style="width: 20%"
+          type="number"
+        />
+        <button onclick="createTask()">Add task</button>
+        <ul id="tasks"></ul>
+        <button onclick="refresh()">Refresh</button>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

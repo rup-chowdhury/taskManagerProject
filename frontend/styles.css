@@ -1,0 +1,55 @@
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  background: #f7f7fb;
+}
+h1 {
+  margin-bottom: 0;
+}
+.sub {
+  color: #555;
+  margin-top: 0.25rem;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+}
+input,
+button {
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+}
+button {
+  cursor: pointer;
+}
+li {
+  margin: 0.3rem 0;
+}
+.done {
+  font-weight: bold;
+  color: green;
+}
+code {
+  background: #eee;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+#log {
+  white-space: pre-wrap;
+  background: #111;
+  color: #0f0;
+  padding: 0.75rem;
+  border-radius: 8px;
+  max-height: 220px;
+  overflow: auto;
+}
