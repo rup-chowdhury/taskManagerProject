@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-service
+  labels: { app: task-service }
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: task-service }
+  template:
+    metadata:
+      labels: { app: task-service }
+    spec:
+      containers:
+        - name: tasks
+          image: DOCKERHUB_USER/taskboard-task:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          env:
+            - name: PGHOST
+              value: postgres
+            - name: PGPORT
+              value: "5432"
+            - name: PGDATABASE
+              value: taskboard
+            - name: PGUSER
+              valueFrom:
+                { secretKeyRef: { name: postgres-secret, key: POSTGRES_USER } }
+            - name: PGPASSWORD
+              valueFrom:
+                {
+                  secretKeyRef:
+                    { name: postgres-secret, key: POSTGRES_PASSWORD },
+                }
+            - name: USER_SERVICE_URL
+              value: http://user-service:3001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: task-service
+spec:
+  selector: { app: task-service }
+  ports:
+    - port: 5000
+      targetPort: 5000
+  type: ClusterIP
