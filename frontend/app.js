@@ -28,7 +28,7 @@ async function refresh() {
       .map((t) => {
         const title = t.taskTitle || t.title;
         const done = t.isCompleted ?? t.done;
-        return `<li class="${done ? "done" : ""}">${t.id} ${title} [user ${t.user_id}] ${done ? "Completed" : "Pending"} <button onclick="toggleTask(${t.id},${!done})">toggle</button> <button onclick="delTask(${t.id})">del</button></li>`;
+        return `<li class="${done ? "done" : ""}">${t.id} ${title} [user ${t.user_id}] ${done ? "Completed" : "Pending"} <button onclick="toggleTask(${t.id},${!done})">${done ? "Not Complete" : "Complete"}</button> <button onclick="delTask(${t.id})">del</button></li>`;
       })
       .join("") || "<li><i>no tasks</i></li>";
 }
