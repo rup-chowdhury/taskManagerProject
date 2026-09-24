@@ -17,5 +17,5 @@ Write-Host "Waiting for pods..."
 kubectl wait --for=condition=ready pod -l app=postgres --timeout=180s
 kubectl get pods,svc,pvc
 Write-Host ""
-Write-Host "Open http://localhost:30080 in your browser."
+Write-Host "Open http://localhost in your browser."
 Write-Host "Logs: kubectl logs -l app=task-service --tail=50"
